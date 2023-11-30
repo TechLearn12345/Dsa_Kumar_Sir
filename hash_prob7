@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    string arr;
+    int k;
+
+    cin >> arr;
+    cin >> k;
+
+    int n= arr.length();
+
+    unordered_map<char, int> mp;
+    int maxxi = 0, left = 0;    
+
+    for(int right = 0; right < n; right++){
+        mp[arr[right]]++;
+
+        while(left<=right && mp.size() > k){
+            mp[arr[left]]--;
+            if(mp[arr[left]] == 0)
+                mp.erase(arr[left]);
+            left++;
+        }
+
+        if(mp.size()==k){
+            maxxi = max(maxxi, right-left+1);
+        }
+    }
+
+    cout << maxxi << endl;
+
+    return 0;
+}
